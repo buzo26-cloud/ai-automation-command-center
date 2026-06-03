@@ -1,0 +1,14 @@
+# Local OS/editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local backups/exports
+automation-command-center-*.json
+automation-command-center-*.csv
+*.zip
+
+# Logs/temp
+*.log
+tmp/
+temp/

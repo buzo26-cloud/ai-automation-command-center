@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Automation Command Center</title>
+    <link rel="stylesheet" href="./styles.css?v=6" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Create. Publish. Track. Improve.</p>
+          <h1>AI Automation Command Center</h1>
+        </div>
+        <div class="topbar-actions" aria-label="Data actions">
+          <button class="ghost-button" id="exportJsonButton" type="button">Export JSON</button>
+          <button class="ghost-button" id="exportCsvButton" type="button">Export CSV</button>
+          <label class="ghost-button file-button">
+            Import
+            <input id="importFileInput" type="file" accept="application/json" />
+          </label>
+        </div>
+      </header>
+
+      <main class="workspace-grid">
+        <section class="panel command-panel" aria-labelledby="command-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Main prompt</p>
+              <h2 id="command-title">Instruction do, system plan banayega</h2>
+            </div>
+            <span class="status-pill" id="approvalModePill">Approval mode</span>
+          </div>
+          <textarea
+            id="commandInput"
+            rows="6"
+            spellcheck="true"
+            placeholder="Example: Aaj AI automation niche ke liye 3 Instagram posts, 1 LinkedIn post, 1 YouTube Shorts script banao, publishing tasks add karo, aur tracker update karo."
+          ></textarea>
+          <div class="button-row">
+            <button class="primary-button" id="runCommandButton" type="button">Run Command</button>
+            <button class="secondary-button" id="dailyContentButton" type="button">Daily Content</button>
+            <button class="secondary-button" id="projectButton" type="button">New Project</button>
+            <button class="secondary-button" id="reportButton" type="button">Daily Report</button>
+          </div>
+          <div class="output-box" id="assistantOutput" aria-live="polite">
+            Ready. Ek instruction do aur workflow generate ho jayega.
+          </div>
+          <div class="free-mode-strip" aria-label="Free mode status">
+            <strong>Free local mode active</strong>
+            <span>No API key. No paid service. Data stays in this browser.</span>
+          </div>
+        </section>
+
+        <section class="panel metrics-panel" aria-labelledby="metrics-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Today</p>
+              <h2 id="metrics-title">Execution snapshot</h2>
+            </div>
+            <button class="ghost-button compact" id="seedButton" type="button">Load Starter Data</button>
+          </div>
+          <div class="metric-grid">
+            <div class="metric">
+              <span id="metricContent">0</span>
+              <p>Content items</p>
+            </div>
+            <div class="metric">
+              <span id="metricTasks">0</span>
+              <p>Open tasks</p>
+            </div>
+            <div class="metric">
+              <span id="metricProjects">0</span>
+              <p>Projects</p>
+            </div>
+            <div class="metric">
+              <span id="metricPublished">0</span>
+              <p>Published</p>
+            </div>
+          </div>
+          <div class="mini-section">
+            <h3>Next actions</h3>
+            <div id="nextActionsList" class="stack-list empty-list">No tasks yet.</div>
+          </div>
+        </section>
+
+        <section class="panel checklist-panel" aria-labelledby="checklist-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Execute</p>
+              <h2 id="checklist-title">Daily checklist</h2>
+            </div>
+            <div class="button-row">
+              <button class="ghost-button compact" id="resetChecklistButton" type="button">Reset</button>
+              <button class="ghost-button compact" id="addChecklistItemButton" type="button">Add</button>
+            </div>
+          </div>
+          <div id="checklistList" class="checklist-list empty-list">No checklist yet.</div>
+        </section>
+
+        <section class="panel guidelines-panel" aria-labelledby="guidelines-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Rules</p>
+              <h2 id="guidelines-title">Brand guidelines</h2>
+            </div>
+            <button class="ghost-button compact" id="saveGuidelinesButton" type="button">Save</button>
+          </div>
+          <form class="guideline-form" id="guidelinesForm">
+            <label>
+              Niche
+              <input id="nicheInput" type="text" />
+            </label>
+            <label>
+              Audience
+              <input id="audienceInput" type="text" />
+            </label>
+            <label>
+              Tone
+              <input id="toneInput" type="text" />
+            </label>
+            <label>
+              Content rules
+              <textarea id="rulesInput" rows="4"></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Daily posts
+                <input id="dailyPostsInput" min="1" max="10" type="number" />
+              </label>
+              <label>
+                Approval
+                <select id="approvalInput">
+                  <option value="required">Required before publishing</option>
+                  <option value="trusted">Auto for trusted workflows</option>
+                </select>
+              </label>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel calendar-panel" aria-labelledby="calendar-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Plan</p>
+              <h2 id="calendar-title">7-day content calendar</h2>
+            </div>
+            <button class="ghost-button compact" id="generateCalendarButton" type="button">Generate Week</button>
+          </div>
+          <div id="calendarList" class="calendar-list empty-list">No calendar yet.</div>
+        </section>
+
+        <section class="panel growth-panel" aria-labelledby="growth-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Earn</p>
+              <h2 id="growth-title">Growth tracker</h2>
+            </div>
+            <div class="button-row">
+              <button class="ghost-button compact" id="addLeadButton" type="button">Add Lead</button>
+              <button class="ghost-button compact" id="addEarningButton" type="button">Add Earning</button>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric">
+              <span id="metricLeads">0</span>
+              <p>Leads</p>
+            </div>
+            <div class="metric">
+              <span id="metricRevenue">0</span>
+              <p>Revenue</p>
+            </div>
+            <div class="metric">
+              <span id="metricViews">0</span>
+              <p>Views</p>
+            </div>
+            <div class="metric">
+              <span id="metricEngagement">0</span>
+              <p>Engagement</p>
+            </div>
+          </div>
+          <div class="mini-section">
+            <h3>Recent growth</h3>
+            <div id="growthList" class="stack-list empty-list">No growth tracked yet.</div>
+          </div>
+        </section>
+
+        <section class="panel queue-panel" aria-labelledby="queue-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Publishing</p>
+              <h2 id="queue-title">Content queue</h2>
+            </div>
+            <select id="contentFilter" aria-label="Filter content">
+              <option value="all">All</option>
+              <option value="Draft">Draft</option>
+              <option value="Ready">Ready</option>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Published">Published</option>
+            </select>
+          </div>
+          <div id="contentQueue" class="content-grid empty-list">No content yet.</div>
+        </section>
+
+        <section class="panel projects-panel" aria-labelledby="projects-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Build</p>
+              <h2 id="projects-title">Projects</h2>
+            </div>
+            <button class="ghost-button compact" id="addProjectButton" type="button">Add</button>
+          </div>
+          <div id="projectList" class="stack-list empty-list">No projects yet.</div>
+        </section>
+
+        <section class="panel tasks-panel" aria-labelledby="tasks-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Follow-up</p>
+              <h2 id="tasks-title">Task tracker</h2>
+            </div>
+            <button class="ghost-button compact" id="addTaskButton" type="button">Add</button>
+          </div>
+          <div id="taskList" class="stack-list empty-list">No tasks yet.</div>
+        </section>
+
+        <section class="panel log-panel" aria-labelledby="log-title">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Memory</p>
+              <h2 id="log-title">Activity log</h2>
+            </div>
+            <button class="ghost-button compact danger" id="clearButton" type="button">Clear</button>
+          </div>
+          <div id="activityLog" class="log-list empty-list">No activity yet.</div>
+        </section>
+      </main>
+    </div>
+
+    <template id="contentCardTemplate">
+      <article class="content-card">
+        <div class="card-topline">
+          <span class="platform-badge"></span>
+          <select class="status-select" aria-label="Update status">
+            <option>Draft</option>
+            <option>Ready</option>
+            <option>Scheduled</option>
+            <option>Published</option>
+          </select>
+        </div>
+        <h3></h3>
+        <p class="hook"></p>
+        <p class="caption"></p>
+        <p class="metrics-line"></p>
+        <details>
+          <summary>Script and asset prompt</summary>
+          <p class="script"></p>
+          <p class="asset-prompt"></p>
+        </details>
+        <div class="card-footer">
+          <span class="schedule"></span>
+          <button class="ghost-button compact copy-button" type="button">Copy</button>
+          <button class="ghost-button compact log-metrics-button" type="button">Log Metrics</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="./app.js?v=6"></script>
+  </body>
+</html>
