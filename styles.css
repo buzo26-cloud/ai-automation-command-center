@@ -141,6 +141,81 @@ textarea {
   gap: 8px;
 }
 
+.intro-panel {
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid rgba(216, 221, 217, 0.95);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(280px, 1fr) minmax(300px, 0.8fr);
+  margin-bottom: 14px;
+  padding: 18px;
+}
+
+.intro-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.intro-copy h2 {
+  font-size: clamp(1.45rem, 2.6vw, 2.45rem);
+  line-height: 1.05;
+  margin: 0;
+  max-width: 820px;
+}
+
+.intro-copy p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 780px;
+}
+
+.text-link-button {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: #2d3742;
+  display: inline-flex;
+  font-weight: 800;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  text-decoration: none;
+}
+
+.text-link-button:hover {
+  background: var(--surface-soft);
+}
+
+.intro-flow {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.intro-flow div {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 6px;
+  min-height: 104px;
+  padding: 14px;
+}
+
+.intro-flow strong {
+  color: var(--accent-dark);
+}
+
+.intro-flow span {
+  color: var(--muted);
+  line-height: 1.35;
+}
+
 .workspace-grid {
   align-items: start;
   display: grid;
@@ -554,6 +629,10 @@ label.file-button:hover {
     align-items: start;
     flex-direction: column;
   }
+
+  .intro-panel {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -567,6 +646,7 @@ label.file-button:hover {
 
   .content-grid,
   .metric-grid,
+  .intro-flow,
   .form-row,
   .calendar-item {
     grid-template-columns: 1fr;

@@ -2,6 +2,12 @@
 
 Yeh project abhi **100% free local mode** mein hai. API key, paid OpenAI billing, server setup, ya subscription ki need nahi hai.
 
+Live site:
+
+```text
+https://buzo26-cloud.github.io/ai-automation-command-center/
+```
+
 Open this file in your browser:
 
 ```text
@@ -64,4 +70,5 @@ Paid API ya paid automation tabhi add karni hai jab:
 - `index.html`: app layout
 - `styles.css`: dashboard design
 - `app.js`: free local automation logic
+- `CODE_GUIDE.md`: code explanation guide
 - `README.md`: usage guide

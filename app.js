@@ -29,6 +29,8 @@ const $ = (selector) => document.querySelector(selector);
 
 const els = {
   commandInput: $("#commandInput"),
+  quickWeekButton: $("#quickWeekButton"),
+  quickDemoButton: $("#quickDemoButton"),
   runCommandButton: $("#runCommandButton"),
   dailyContentButton: $("#dailyContentButton"),
   projectButton: $("#projectButton"),
@@ -164,6 +166,20 @@ function init() {
 }
 
 function bindEvents() {
+  els.quickWeekButton.addEventListener("click", safeHandler(() => {
+    generateWeeklyCalendar();
+    saveState();
+    render();
+    scrollToPanel("#calendar-title");
+  }));
+
+  els.quickDemoButton.addEventListener("click", safeHandler(() => {
+    loadStarterData();
+    saveState();
+    render();
+    scrollToPanel("#command-title");
+  }));
+
   els.runCommandButton.addEventListener("click", safeHandler(() => {
     const instruction = els.commandInput.value.trim();
     runCommand(instruction || "Create a daily content plan and update the tracker.");
@@ -294,6 +310,13 @@ function safeHandler(callback) {
         reportError("Command failed inside the browser. I saved the technical detail here so we can fix it.", error);
       });
   };
+}
+
+function scrollToPanel(selector) {
+  const target = document.querySelector(selector);
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 function hydrateGuidelinesForm() {

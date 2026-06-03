@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>AI Automation Command Center</title>
-    <link rel="stylesheet" href="./styles.css?v=6" />
+    <link rel="stylesheet" href="./styles.css?v=7" />
   </head>
   <body>
     <div class="app-shell">
@@ -22,6 +22,40 @@
           </label>
         </div>
       </header>
+
+      <section class="intro-panel" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <p class="section-kicker">Free public v2</p>
+          <h2 id="intro-title">A simple operating system for content, projects, leads, and daily execution.</h2>
+          <p>
+            Use one prompt to plan work, turn weekly ideas into drafts, publish manually with free tools,
+            and track what actually creates leads or revenue.
+          </p>
+          <div class="button-row">
+            <button class="primary-button" id="quickWeekButton" type="button">Generate This Week</button>
+            <button class="secondary-button" id="quickDemoButton" type="button">Load Demo</button>
+            <a class="text-link-button" href="#command-title">Open Dashboard</a>
+          </div>
+        </div>
+        <div class="intro-flow" aria-label="Workflow overview">
+          <div>
+            <strong>1. Plan</strong>
+            <span>Generate a 7-day calendar</span>
+          </div>
+          <div>
+            <strong>2. Create</strong>
+            <span>Turn calendar items into drafts</span>
+          </div>
+          <div>
+            <strong>3. Publish</strong>
+            <span>Post manually with free tools</span>
+          </div>
+          <div>
+            <strong>4. Measure</strong>
+            <span>Log metrics, leads, and revenue</span>
+          </div>
+        </div>
+      </section>
 
       <main class="workspace-grid">
         <section class="panel command-panel" aria-labelledby="command-title">
@@ -266,6 +300,6 @@
       </article>
     </template>
 
-    <script src="./app.js?v=6"></script>
+    <script src="./app.js?v=7"></script>
   </body>
 </html>
